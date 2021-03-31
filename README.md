@@ -1,6 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is the coding exercise for Health Espresso.
 
-## Getting Started
+## How to run
 
 First, run the development server:
 
@@ -12,23 +12,31 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Objective
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+The goal is to create a single page web application using the Next.js [https://nextjs.org](https://nextjs.org/) framework. Next.js is a fully functional, out-of-the-box, React.js boilerplate solution. It will come with everything you need to get up and running for this project - we want to minimize the amount of time you spend doing “not-so-fun” configuration related tasks.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The application you build should make a request to the following mock API endpoint [(https://jsonplaceholder.typicode.com/posts)](https://jsonplaceholder.typicode.com/posts) and return all the posts dynamically in a list.
 
-## Learn More
+## Functionality
 
-To learn more about Next.js, take a look at the following resources:
+- For each list item, display the user id, the title, and the description (body).
+- In addition to displaying the list, please allow the user to paginate through the list items with 5 items on each page.
+- Include a toggle that removes the pagination functionality.
+  - Once this toggle is clicked, all the items will be displayed instead of the pagination functionality.
+  - Once this toggle is clicked, show a button that allows the user to click and have all the posts grouped by user id.
+    - I.e., you will need to put each user’s posts into their own sublist.
+    - You can just include a header for each sub list with the user id.
+    - If this toggle is clicked again, the list returns to normal.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Styling
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Please use styled components to style the list items, header items, and buttons (for toggles). No need to get super fancy, we just want to make sure you can work with styled components :).
 
-## Deploy on Vercel
+## Mode of Delivery
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Please submit all your code in a public github repository. There is no requirement for you to deploy your code anywhere, but you’re more than welcome to if you’d like!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Extra notes
+
+Please don’t spend much more than 3 hours on this project. For any missing functionality, you can just explain how you would’ve approached it if you had the time. You will be presenting your solution to a panel of interviewers, so be prepared to justify some of your decisions and design choices.
