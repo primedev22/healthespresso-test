@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Head from 'next/head'
 import Card from '../components/Card'
@@ -42,28 +42,30 @@ export default function Home({ posts, groupedPosts }) {
   const [paginationMode, setPaginationMode] = useState(true)
   const [groupMode, setGroupMode] = useState(false)
   const [page, setPage] = useState(1)
-  const [paginatedPosts, setPaginatedPosts] = useState([])
 
-  useEffect(() => {
-    if (paginationMode) {
-      setPaginatedPosts(posts.slice(rowsPerPage * (page - 1), rowsPerPage* page))
-    }
-  }, [page])
-
-  const paginatedPostList = paginatedPosts.map(({id, userId, title, body}) => 
-    <Card key={id} userId={userId} title={title} description={body} />
-  )
-  const allPostList = posts.map(({id, userId, title, body}) => 
-    <Card key={id} userId={userId} title={title} description={body} />
-  )
-  const groupedPostList = Object.keys(groupedPosts).map(groupKey => 
-    <Group key={groupKey}>
-      <GroupLabel>User - {groupKey}</GroupLabel>
-      {groupedPosts[groupKey].map(({id, userId, title, body}) => 
+  // Get element list depending on PaginationMode, Page, GroupMode
+  let postList = null;
+  if (paginationMode) {
+    postList = posts.slice(rowsPerPage * (page - 1), rowsPerPage* page).map(({id, userId, title, body}) => 
+      <Card key={id} userId={userId} title={title} description={body} />
+    )
+  } else {
+    if (groupMode) {
+      postList = Object.keys(groupedPosts).map(groupKey => 
+        <Group key={groupKey}>
+          <GroupLabel>User - {groupKey}</GroupLabel>
+          {groupedPosts[groupKey].map(({id, userId, title, body}) => 
+            <Card key={id} userId={userId} title={title} description={body} />
+          )}
+        </Group>
+      )
+    } else {
+      postList = posts.map(({id, userId, title, body}) => 
         <Card key={id} userId={userId} title={title} description={body} />
-      )}
-    </Group>
-  )
+      )
+    }
+  }
+
   return (
     <Container>
       <Head>
@@ -77,9 +79,8 @@ export default function Home({ posts, groupedPosts }) {
           {!paginationMode && <Toggle label='Group mode' value={groupMode} onChange={setGroupMode} />}
         </ToggleContainer>
 
-        {paginationMode && paginatedPostList}
-        {!paginationMode && !groupMode && allPostList}
-        {!paginationMode && groupMode && groupedPostList}
+        {postList}
+
         {paginationMode && <Pagination page={page} rowsPerPage={5} total={total} onChange={setPage} />}
       </Main>
     </Container>
