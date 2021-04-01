@@ -12,12 +12,14 @@ const Item = styled.a`
   text-decoration: none;
   transition: background-color .3s;
   cursor: pointer;
-  &.active {
-    background-color: #4CAF50;
+  ${props => props.active && `
+    background-color: #2196F3;
     color: white;
-  }
-  &:hover:not(.active) {
-    background-color: #ddd;
+  `}
+  &:hover {
+    ${props => !props.active && `
+      background-color: #ddd;
+    `}
   }
 `
 
@@ -32,7 +34,7 @@ function Pagination({rowsPerPage, total, page, onChange}) {
     <Container>
       <Item onClick={navigateTo(1)}>&laquo;</Item>
       {items.map(item =>
-        <Item key={item} className={item === page ? 'active' : ''} onClick={navigateTo(item)}>{item}</Item>
+        <Item key={item} active={item === page} onClick={navigateTo(item)}>{item}</Item>
       )}
       <Item onClick={navigateTo(lastPage)}>&raquo;</Item>
     </Container>
