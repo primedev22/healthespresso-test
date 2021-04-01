@@ -32,7 +32,7 @@ function Pagination({rowsPerPage, total, page, onChange}) {
     <Container>
       <Item onClick={navigateTo(1)}>&laquo;</Item>
       {items.map(item =>
-        <Item className={item === page ? 'active' : ''} onClick={navigateTo(item)}>{item}</Item>
+        <Item key={item} className={item === page ? 'active' : ''} onClick={navigateTo(item)}>{item}</Item>
       )}
       <Item onClick={navigateTo(lastPage)}>&raquo;</Item>
     </Container>
