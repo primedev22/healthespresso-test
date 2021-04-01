@@ -2,23 +2,31 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const Container = styled.label`
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+`
+const CheckBox = styled.label`
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
 `
+const Label = styled.label`
+  margin-right: 10px;
+  color: #2196F3;
+`
 const Control = styled.input`
   opacity: 0;
   width: 0;
   height: 0;
-  &:checked + .slider {
+  &:checked + span {
     background-color: #2196F3;
   }
-  &:focus + .slider {
+  &:focus + span {
     box-shadow: 0 0 1px #2196F3;
   }
-  &:checked + .slider:before {
+  &:checked + span:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
@@ -49,21 +57,27 @@ const Slider = styled.span`
   }
 `
 
-function Toggle({value, onChange}) {
+function Toggle({label, value, onChange}) {
   const handleChange = (e) => onChange(e.target.checked)
   return (
     <Container>
-      <Control type="checkbox" checked={value} onChange={handleChange} />
-      <Slider className='slider' />
+      <Label>{label}</Label>
+      <CheckBox>
+        <Control type="checkbox" checked={value} onChange={handleChange} />
+        <Slider />
+      </CheckBox>
     </Container>
   )
 }
 
 Toggle.propTypes = {
+  label: PropTypes.string,
   value: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
 }
 
-Toggle.defaultProps = {}
+Toggle.defaultProps = {
+  label: '',
+}
 
 export default memo(Toggle)

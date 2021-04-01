@@ -21,3 +21,10 @@ export const Unchecked = Template.bind({});
 Unchecked.args = {
   value: false,
 };
+
+export const Labeled = Template.bind({});
+
+Labeled.args = {
+  label: 'Group By',
+  value: true,
+};
